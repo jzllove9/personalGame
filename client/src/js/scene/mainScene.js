@@ -1,6 +1,7 @@
+import ObjUtils from '../utils/objUtils'
+
 import Phaser from 'phaser'
 import BaseScene from './baseScene'
-import ObjUtils from '../utils/objUtils'
 
 export default class mainScene {
     constructor(opts) {

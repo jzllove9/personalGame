@@ -1,45 +1,40 @@
-import cGraphics from '../base/customGraphics'
-
 export default class BasePlayer {
 
     constructor(scene, options) {
-        this._className = 'BasePlayer'
-        this._graph = null;
-        this._graph = this.initPlayer(scene, options);
+        this._role = null;
+
+        this.initPlayer(scene, options);
     }
 
     /**
-     * 初始化player
+     * 初始化player的角色graphics(必须重写)
      * @param scene
      * @param options
      */
     initPlayer(scene, options) {
-        console.log('base player class was initializationed, please overwrite it by self')
-
-        let _lineStyle = options.lineStyle ? options.lineStyle : {};
-        let _fillStyle = options.fillStyle ? options.fillStyle : {};
-
-        let _tempGraph = new cGraphics(scene, options)
-        _tempGraph.lineStyle(_lineStyle.tickness || 5, _lineStyle.color || 0x0000FF, _lineStyle.opacity || 0.5);
-        _tempGraph.fillStyle(_fillStyle.color || 0xff0000, _fillStyle.opacity || 0.5);
-        _tempGraph.fillCircle(0, 0, options.radius || 40);
-        _tempGraph.strokeCircle(0, 0, options.radius || 40);
-
-        return _tempGraph;
+        console.log('base player class was initializationed, please extends and overwrite it')
     }
 
     /**
-     * clear player graphcis
+     * 获取player的角色graphics元素
+     * @returns {*|null}
+     */
+    getGraph(){
+        return this._role._graph;
+    }
+
+    /**
+     * 清空player的角色graphics
      */
     clearPlayer() {
-        this._graph.clear();
+        this._role.clear();
     }
 
     /**
-     * destory player graphcis
+     * 销毁player的角色graphics
      */
     destoryPlayer() {
-        this._graph.destory();
-        this._graph = null;
+        this._role.destory();
+        this._role = null;
     }
 }

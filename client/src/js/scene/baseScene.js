@@ -1,31 +1,38 @@
 import Phaser from 'phaser'
-import Player from '../roles/mainPlayer'
+
+import RoleList from '../roles/rolesList'
+import MainPlayer from '../roles/mainPlayer'
+import MainCtrl from '../controller/mainPlayerCtrl'
+
 
 export default class BaseScene extends Phaser.Scene {
     graphics = null;
 
+
+    constructor() {
+        super();
+        this.mainPlayerPos = {x: 100, y: 100};
+        this._ctrl = null;
+    }
+
+
     preload() {
-        console.log('preload')
+        console.log('scene preload')
     }
 
     create() {
-        let _r = new Player(this, {
-            x: 150,
-            y: 150,
-            height: 100,
-            width: 150,
-            lineStyle:{
-                tickness: 3,
-                color: 0xFFFF00,
-                opacity: 1
-            },
-            fillStyle:{
-                color: 0xFF00FF,
-                opacity: 0.5
-            }
+        let that = this;
+
+        let _mp = new MainPlayer(this, {
+            initPos: this.mainPlayerPos,
+            roleName: RoleList.Soldier,
         })
+
+        this._ctrl = new MainCtrl(this, _mp)
+
     }
 
     update() {
+        this._ctrl.update();
     }
 }

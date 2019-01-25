@@ -1,38 +1,24 @@
+/**
+ * 基础场景类，提供场景Hook
+ */
+
 import Phaser from 'phaser'
 
-import RoleList from '../roles/rolesList'
-import MainPlayer from '../roles/mainPlayer'
-import MainCtrl from '../controller/mainPlayerCtrl'
-
-
 export default class BaseScene extends Phaser.Scene {
-    graphics = null;
-
-
-    constructor() {
+    constructor(options) {
         super();
-        this.mainPlayerPos = {x: 100, y: 100};
-        this._ctrl = null;
+        this._options = options
     }
 
-
     preload() {
-        console.log('scene preload')
+        this._options.onPreload && this._options.onPreload()
     }
 
     create() {
-        let that = this;
-
-        let _mp = new MainPlayer(this, {
-            initPos: this.mainPlayerPos,
-            roleName: RoleList.Soldier,
-        })
-
-        this._ctrl = new MainCtrl(this, _mp)
-
+        this._options.onCreate && this._options.onCreate();
     }
 
     update() {
-        this._ctrl.update();
+        this._options.onUpdate && this._options.onUpdate();
     }
 }

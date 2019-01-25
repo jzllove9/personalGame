@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import MainScene from '../../js/scene/mainScene'
+    import MainSceneManager from '../../js/scene/mainSceneManager'
 
     export default {
         data() {
@@ -23,7 +23,7 @@
 
                 let _canvas = this.$refs.myCanvas;
 
-                this.mainScene = new MainScene({
+                this.mainScene = new MainSceneManager({
                     height: _height,
                     width: _width,
                     canvas: _canvas

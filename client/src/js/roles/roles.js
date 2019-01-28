@@ -18,7 +18,7 @@ export default class Roles {
             }
         }
 
-        this._graph = null;
+        this._sprite = null;
     }
 
     /**

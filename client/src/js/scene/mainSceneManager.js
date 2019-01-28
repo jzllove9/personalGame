@@ -15,14 +15,14 @@ export default class mainSceneManager {
     constructor(opts) {
         if (!opts) opts = {};
 
-        const mainPlayerPos = {x: 100, y: 100};
+        const mainPlayerPos = {x: 150, y: 150};
         this._ctrl = null;
 
-        //TODO: 对外提供场景回调Hook 请注意this指针问题
         let baseScene = new BaseScene({
             onPreload: () => {
                 console.log('outside preload')
 
+                baseScene.load.image('logo', require('../../assets/logo.png'))
             },
 
             onCreate: () => {

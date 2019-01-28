@@ -20,7 +20,7 @@ export default class BasePlayer {
      * @returns {*|null}
      */
     getGraph(){
-        return this._role._graph;
+        return this._role._sprite;
     }
 
     /**

@@ -1,11 +1,7 @@
 /**
  * 战士类
  */
-
-import ObjUtils from '../utils/objUtils'
-
 import Roles from './roles'
-import cGraphics from '../base/customGraphics'
 
 export default class Soldier extends Roles {
     constructor(scene, opts) {
@@ -13,40 +9,24 @@ export default class Soldier extends Roles {
 
         this._scene = scene;
 
-        //自定义职业样式
-        let customStyle = {
-            lineStyle: {
-                tickness: 2,
-                color: 0xFFFF00,
-                opacity: 0.6
-            },
-            fillStyle: {
-                color: 0xbb4c03,
-                opacity: 1
-            }
-        }
+        this._opts = opts;
 
-        this.options = ObjUtils.mergeObj(this.options, customStyle)
-
-        this._graph = this.initGraphics(this._scene, opts);
+        this._sprite = this.initSprite(this._scene, this._opts);
     }
 
     /**
      * overwrite
      */
-    initGraphics(scene, opts) {
-        let _lineStyle = this.options.lineStyle;
-        let _fillStyle = this.options.fillStyle;
-
-        let _tempGraph = new cGraphics(scene, {
+    initSprite(scene, opts) {
+        let _tempGraph = scene.make.sprite({
+            key: 'logo',
             x: opts.initPos.x,
-            y: opts.initPos.y
-        })
+            y: opts.initPos.y,
+            alpha: { randFloat: [ 1, 1 ] },
 
-        _tempGraph.lineStyle(_lineStyle.tickness || 5, _lineStyle.color || 0x0000FF, _lineStyle.opacity || 0.5);
-        _tempGraph.fillStyle(_fillStyle.color || 0xff0000, _fillStyle.opacity || 0.5);
-        _tempGraph.fillCircle(0, 0, this.options.radius || 40);
-        _tempGraph.strokeCircle(0, 0, this.options.radius || 40);
+        })
+        _tempGraph.scaleX = 0.5;
+        _tempGraph.scaleY = 0.5;
 
         return _tempGraph;
     }
@@ -55,14 +35,14 @@ export default class Soldier extends Roles {
      * overwrite
      */
     clear() {
-        this._graph.clear();
+        this._sprite.clear();
     }
 
     /**
      * overwrite
      */
     destory() {
-        this._graph.destory();
-        this._graph = null;
+        this._sprite.destory();
+        this._sprite = null;
     }
 }

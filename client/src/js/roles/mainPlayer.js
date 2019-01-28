@@ -15,6 +15,7 @@ export default class MainPlayer extends BasePlayer {
         switch (options.roleName) {
             case RolesList.Soldier:
                 this._role = new Soldier(scene, options);
+                console.log(this._role)
                 break;
             default:
                 break;

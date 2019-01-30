@@ -45,6 +45,10 @@
         mounted() {
             this.initMainScene()
         },
+
+        destroyed(){
+            this.mainScene.destory()
+        }
     }
 </script>
 

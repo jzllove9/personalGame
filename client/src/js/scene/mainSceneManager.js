@@ -15,20 +15,19 @@ export default class mainSceneManager {
     constructor(opts) {
         if (!opts) opts = {};
 
-        const mainPlayerPos = {x: 150, y: 150};
+        const mainPlayerPos = {x: 250, y: 250};
         this._ctrl = null;
 
         let baseScene = new BaseScene({
             onPreload: () => {
                 console.log('outside preload')
 
-                baseScene.load.image('logo', require('../../assets/logo.png'))
+                baseScene.load.image('soldier', require('../../assets/images/soldier.png'))
+                baseScene.textures.addBase64('sword', require('../../assets/images/sword.png'))
             },
 
             onCreate: () => {
                 console.log('outside created')
-
-                let that = this;
 
                 let _mp = new MainPlayer(baseScene, {
                     initPos: mainPlayerPos,
@@ -37,7 +36,7 @@ export default class mainSceneManager {
 
                 this._ctrl = new MainCtrl(baseScene, _mp)
 
-                let _cc = new Connect();
+                this._cc = new Connect();
             },
 
             onUpdate: () => {
@@ -47,6 +46,13 @@ export default class mainSceneManager {
 
         let _gameConfig = {
             scene: baseScene,
+            type: Phaser.AUTO,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: false
+                }
+            }
         }
 
         _gameConfig = ObjUtils.mergeObj(_gameConfig, opts)
@@ -61,5 +67,9 @@ export default class mainSceneManager {
      */
     resize(width, height) {
         this.gameScene.resize(width, height)
+    }
+
+    destory(){
+        this._cc.destory();
     }
 }

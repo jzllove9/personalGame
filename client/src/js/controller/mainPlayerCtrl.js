@@ -29,7 +29,8 @@ export default class MainPlayerCtrl {
     initCursorCtrl() {
         let tempCtrl = this._scene.input.keyboard.createCursorKeys();
 
-        this._attackBtn = this._scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)
+        this._attackBtn = this._scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
+        this._Q_btn = this._scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q)
 
         return tempCtrl;
     }
@@ -82,8 +83,11 @@ export default class MainPlayerCtrl {
         }
 
         //attack
-        if(this._attackBtn.isDown){
-            this._currentTarget._role.attack();
+        if (this._attackBtn.isDown) {
+            window._myEmitter.emit('ATTACK_ACTION')
+        }
+        if(this._Q_btn.isDown){
+            window._myEmitter.emit('Q_SKILL_ACTION')
         }
     }
 }

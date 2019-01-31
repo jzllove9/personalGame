@@ -10,6 +10,7 @@ import MainPlayer from "../roles/mainPlayer";
 import RoleList from "../roles/rolesList";
 import MainCtrl from "../controller/mainPlayerCtrl";
 import Connect from "../connect/connect";
+import MyEventEmitter from '../events/eventEmitter'
 
 export default class mainSceneManager {
     constructor(opts) {
@@ -22,8 +23,10 @@ export default class mainSceneManager {
             onPreload: () => {
                 console.log('outside preload')
 
-                baseScene.load.image('soldier', require('../../assets/images/soldier.png'))
-                baseScene.textures.addBase64('sword', require('../../assets/images/sword.png'))
+                baseScene.load.image('soldier', require('../../assets/images/soldier/soldier.png'))
+
+                baseScene.textures.addBase64('sword', require('../../assets/images/soldier/sword.png'))
+                baseScene.textures.addBase64('swordStrom', require('../../assets/images/soldier/swordStrom.png'))
             },
 
             onCreate: () => {
@@ -58,6 +61,8 @@ export default class mainSceneManager {
         _gameConfig = ObjUtils.mergeObj(_gameConfig, opts)
 
         this.gameScene = new Phaser.Game(_gameConfig)
+
+        window._myEmitter = new MyEventEmitter();
     }
 
     /**
